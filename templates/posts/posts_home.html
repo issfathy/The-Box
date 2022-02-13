@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{%load posts_tags%}
+
+{%block title%}
+Posts
+{%endblock%}
+
+
+{%block content%}
+<h1>Posts</h1>
+{%endblock%}
+
+
+{%block content_no_jt%}
+
+{%if topic%}
+<h2>by Topic : {{topic.name}}</h2>
+{%endif%}
+
+{%if posts%}
+{%for post in posts%}
+
+<div class="jumbotron">
+	<a href="{{ post.get_absolute_url }}"><h2>{{post.title}}</h2></a>
+<p>
+	<h3> by {{post.author}} on {{post.publish}}</h3>
+</p>
+
+<p>Topics:
+	{%for topic in post.topics.all %}
+		<a href="{%url 'posts:posts_by_topic' topic.slug %}">
+			{{topic.name}}
+		</a>
+
+		{%if not forloop.last %}, {%endif%}
+	{%endfor%}
+</p>
+
+{{post.body|markdown|truncatewords_html:10}}
+</div>
+
+{%endfor%}
+
+
+{%include 'posts/pagination.html' with page=posts%}
+{%else%}
+<p>
+	<h3>
+		No Posts to show!
+	</h3>
+</p>
+{%endif%}
+
+{%endblock%}
