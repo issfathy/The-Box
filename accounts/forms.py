@@ -10,7 +10,7 @@ class UserRegistrationForm(forms.ModelForm):
 	password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
 	password2 = forms.CharField(label='Re-Enter Password', widget=forms.PasswordInput)
 	
-	email = forms.EmailField()
+	#email = forms.EmailField()
 
 	# meta class
 	class Meta:
@@ -38,27 +38,38 @@ class LoginForm(forms.Form):
 	password = forms.CharField(widget=forms.PasswordInput)
 
 # edit profile form
-class EditProfileForm(forms.Form):
-	username = forms.CharField()
-	first_name = forms.CharField()
-	last_name = forms.CharField()
-	email = forms.EmailField()
-	mob_no = forms.IntegerField()
+class EditProfileForm(forms.ModelForm):
+	class Meta:
+		model = UserProfile
+		fields = '__all__'
+		exclude = ['following', 'user']
+
+class DeleteProfileForm(forms.ModelForm):
+	class Meta:
+		model = UserProfile
+		fields = '__all__'
+		
+
+	# username = forms.CharField()
+	# first_name = forms.CharField()
+	# last_name = forms.CharField()
+	# email = forms.EmailField()
+	# mob_no = forms.IntegerField()
 
 
-	# to check for unique username
-	def clean_username(self):
-		username = self.cleaned_data['username']
-		if (' ') in username:
-			raise ValidationError(f'Username: {username} has space')
-		if User.objects.filter(username=username).exists():
-			raise ValidationError(f'Username: {username} already exists!')
-		return username
+	# # to check for unique username
+	# def clean_username(self):
+	# 	username = self.cleaned_data['username']
+	# 	if (' ') in username:
+	# 		raise ValidationError(f'Username: {username} has space')
+	# 	if User.objects.filter(username=username).exists():
+	# 		raise ValidationError(f'Username: {username} already exists!')
+	# 	return username
 
-	# to check for unique email
-	def clean_email(self):
-		email = self.cleaned_data['email']
-		if User.objects.filter(email=email).exists():
-			raise ValidationError(f"Email: {email} already exists!")
+	# # to check for unique email
+	# def clean_email(self):
+	# 	email = self.cleaned_data['email']
+	# 	if User.objects.filter(email=email).exists():
+	# 		raise ValidationError(f"Email: {email} already exists!")
 
-		return email
+	# 	return email
