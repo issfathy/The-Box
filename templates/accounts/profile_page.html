@@ -1,5 +1,6 @@
 {%extends 'base.html'%}
-
+{% load static %}
+{% block content}
 
 {%block title%}
 {{user.username}}
@@ -8,9 +9,20 @@
 
 
 {%block content%}
+<style>
+	img {
+		height: 250px;
+		width: 250px;
+		border-radius: 50%;
+		overflow: hidden;
+		background-position: center center;
+		background-size: cover;
+	}
+</style>
 
 {%if user.username == request.user.username%}
 <h2>Welcome</h2>
+<img src="{{user.profile.profile_pic.url}}">
 
 {%endif%}
 
@@ -18,14 +30,16 @@
 
 {%if user.username == request.user.username%}
 
-
 <p>
 	<a class="btn btn-primary" href="{% url 'accounts:edit_profile' user.username %}">Edit Profile</a>
+	<a href="{%url 'accounts:delete-event' user.username %}">
+		<button class="btn btn-danger">Delete Acount</button>
+	</a>
 </p>
 
 <p>
 	<a href="{%url 'posts:draft_posts' %}">
-		<button class="btn btn-primary" >Draft Posts</button>
+		<button class="btn btn-primary">Draft Posts</button>
 	</a>
 </p>
 

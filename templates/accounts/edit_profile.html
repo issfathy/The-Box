@@ -1,5 +1,10 @@
 {%extends 'base.html'%}
-
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height: 200px;
+	}
+</style>
 
 {%block title%}
 Edit {{request.user.username}} Profile
@@ -8,11 +13,24 @@ Edit {{request.user.username}} Profile
 
 
 {%block content%}
+<style>
+	img {
+		height: 250px;
+		width: 250px;
+		border-radius: 50%;
+		overflow: hidden;
+		background-position: center center;
+		background-size: cover;
+	}
+</style>
 <h1>Edit Profile: </h1> 
-<h2>{{request.user.username}}</h2>
+<img src="{{user.profile.profile_pic.url}}" >
 
-<form method='post'>
-	{{edit_form.as_p}}
+<h2>{{request.user.userprofile.username}}</h2>
+
+
+<form method='post' action="" enctype="multipart/form-data">
+	{{form.as_p}}
 	{%csrf_token%}
 	<input type="submit" value="Save" class="btn btn-warning">
 </form>

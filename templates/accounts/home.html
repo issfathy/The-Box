@@ -14,6 +14,7 @@ People
 
 {%for user in users%}
 {%if type_of_users == 'Following' %}
+<img class="profile-pic" src="{{request.user.username.profile_pic.url}}" >
 
 <a href="{%url 'accounts:profile' user.user.username %}"> <h3>{{user.user.username}}</h3> </a>
 {%else%}
