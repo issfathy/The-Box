@@ -128,9 +128,10 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (STATIC_DIR,) # setting up static files dir to its location
-
-
+# STATICFILES_DIRS = (STATIC_DIR,) # setting up static files dir to its location
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+    ]
 
 
 # url for login
@@ -142,7 +143,9 @@ LOGIN_REDIRECT_URL = 'homepage' # url after successful login
 LOGOUT_URL = 'accounts:logout'
 LOGOUT_REDIRECT_URL = 'homepage' # url after successful login
 
-
+# Media root
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # setting up email backend to local server
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -151,4 +154,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'theboxsjf@gmail.com'
 EMAIL_HOST_PASSWORD = 'Software@123'
-DEFAULT_FROM_EMAIL = 'The Box team <noreply@thebox.com>'
+DEFAULT_FROM_EMAIL = 'The Box Team <noreply@thebox.com>'

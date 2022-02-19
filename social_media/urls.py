@@ -15,10 +15,13 @@ Including another URLconf
 """
 
 # imports
+from xml.dom.minidom import Document
 from django.contrib import admin
 from django.urls import path, include
-from . import views as main_views
+from .import views as main_views
 
+from django.conf.urls.static import static
+from django.conf import settings
 
 # list of urls after domain/
 urlpatterns = [
@@ -31,3 +34,5 @@ urlpatterns = [
     # posts app urls
     path('posts/', include('posts.urls', namespace='posts')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
