@@ -30,7 +30,7 @@ class UserProfileForm(forms.ModelForm):
 	# meta class
 	class Meta:
 		model = UserProfile
-		fields = ('mob_no',)
+		fields = 'bio','profile_pic'
 
 # login form
 class LoginForm(forms.Form):
@@ -49,27 +49,3 @@ class DeleteProfileForm(forms.ModelForm):
 		model = UserProfile
 		fields = '__all__'
 		
-
-	# username = forms.CharField()
-	# first_name = forms.CharField()
-	# last_name = forms.CharField()
-	# email = forms.EmailField()
-	# mob_no = forms.IntegerField()
-
-
-	# # to check for unique username
-	# def clean_username(self):
-	# 	username = self.cleaned_data['username']
-	# 	if (' ') in username:
-	# 		raise ValidationError(f'Username: {username} has space')
-	# 	if User.objects.filter(username=username).exists():
-	# 		raise ValidationError(f'Username: {username} already exists!')
-	# 	return username
-
-	# # to check for unique email
-	# def clean_email(self):
-	# 	email = self.cleaned_data['email']
-	# 	if User.objects.filter(email=email).exists():
-	# 		raise ValidationError(f"Email: {email} already exists!")
-
-	# 	return email

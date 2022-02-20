@@ -31,13 +31,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{%url 'posts:posts_home'%}">Posts <span class="sr-only"></span></a>
+        <a class="nav-link" href="{%url 'posts:posts_home'%}">Home <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{%url 'posts:new_post'%}">Post <span class="sr-only"></span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link active" href="{%url 'posts:topics_view'%}">Topics</a>
       </li>
 
       {%if request.user.is_authenticated%}
+      <li class="nav-item">
+        <a class="nav-link active" <a href="{%url 'accounts:profile' user.username %}"> Profile</a>
+      </li>
+      
       <li class="nav-item dropdown">
         <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           People
@@ -53,7 +60,7 @@
       </li>
       {%endif%}
     </ul>
-
+    <!-- topics -->
     {%if not request.user.is_authenticated%}
       <a href="{%url 'accounts:register'%}">
         <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Register</button>

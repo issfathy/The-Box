@@ -1,0 +1,21 @@
+
+
+
+
+
+
+
+
+1. Download File
+2. Create a virtual enviroment outside the main folder as such 
+	python -m venv env
+	This commend should not be inside the same folder as the manage.py
+3. Activate the virtual environment 
+	env/scripts/activate
+4. cd into main folder 
+5. Run cmd python install -r requirments.txt
+6. Migrate changes made through out the entire project
+	python manage.py migrate
+7. Run server 
+	python manage.py runserver
+8. Ctrl + click the site 

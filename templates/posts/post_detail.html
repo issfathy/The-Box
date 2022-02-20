@@ -16,10 +16,21 @@
 {%endif%}
 
 <h1>{{post.title}}</h1>
-by <h2> {{post.author}} </h2> on <h2> {{post.publish}} </h2>
+by <h2> {{post.author}} </h2> on <h4> {{post.publish}} </h4>
 
 
 <p>
 	{{post.body|markdown}}
 </p>
+
+<br/><br/>
+<hr>
+<br/>
+<form action = "{% url 'posts:like_post' post.pk %}" 
+method="POST">
+	{% csrf_token %}
+	<button type="submit", name="post_id", 
+	value="{{ post.id }}" class="btn btn-primary">Like</button> - {{ total_likes}}
+</form>
 {%endblock%}
+
