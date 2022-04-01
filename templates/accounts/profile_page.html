@@ -1,0 +1,113 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content}
+
+{%block title%}
+{{user.username}}
+{%endblock%}
+
+
+
+{%block content%}
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Lucida Console'
+' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Tinos' rel='stylesheet'>
+
+<style>
+	img {
+		height: 200px;
+		width: 200px;
+		border-radius: 50%;
+		overflow: hidden;
+		background-position: center center;
+		background-size: cover;
+	}
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+		font-size: 40px;
+	}
+	.subtitles-2 {
+		color: black;
+		font-family: 'Lucida Console';
+		font-size: 20px;
+	}
+	.subtitles-3 {
+		color: black;
+		font-family: 'Special Elite';
+		font-size: 20px;
+	}
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+
+	.bio {
+		color: black;
+		font-family: 'Tinos';
+	}
+</style>
+
+{%if user.username == request.user.username%}
+
+<h2 class="subtitles">My Box</h2>
+
+<hr class="lines"/>
+
+<img src="{{user.profile.profile_pic.url}}">
+
+{%endif%}
+
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+
+{%if user.username == request.user.username%}
+
+<p>
+	<a class="btn btn-primary" href="{% url 'accounts:edit_profile' user.username %}">Edit Profile</a>
+	<a href="{%url 'accounts:delete-event' user.username %}">
+		<button class="btn btn-danger">Delete Acount</button>
+	</a>
+</p>
+
+<p>
+	<a href="{%url 'posts:draft_posts' %}">
+		<button class="btn btn-primary">Draft Posts</button>
+	</a>
+</p>
+
+{%else%}
+<p>
+	<a href="{%url 'accounts:mute_view' user.username%}">
+		<button class="btn btn-primary">Mute</button>
+	</a>
+</p>
+{%if not follow%}
+<p>
+	<a href="{%url 'accounts:follow' user.username %}">Follow</a>
+</p>
+
+{%else%}
+
+<p>
+	<a href="{%url 'accounts:unfollow' user.username %}">Unfollow</a>
+</p>
+
+{%endif%}
+
+{%endif%}
+
+<p class="subtitles-2">Username: {{user.username}}</p>
+<p class="subtitles-2">Name: {{user.first_name}} {{user.last_name}}</p>
+<p class="subtitles-2">Bio: {{user.profile.bio}}</p>
+<p class="subtitles-2">Status: {{user.profile.status}}</p>
+<p class="subtitles-2">Close Friends: <a href="/accounts/{{user.profile.friend1}}">{{user.profile.friend1}}</a>,
+	<a href="/accounts/{{user.profile.friend2}}">{{user.profile.friend2}}</a>,
+	<a href="/accounts/{{user.profile.friend3}}">{{user.profile.friend3}}</a>
+</p>
+
+<hr class="lines"/>
+<p class="subtitles-3">THE BOX 2022</p>
+{%endblock%}

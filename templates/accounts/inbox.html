@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+{% block content %}
+
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Lucida Console'
+' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Tinos' rel='stylesheet'>
+
+<style>
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+		font-size: 40px;
+	}
+	.subtitles-2 {
+		color: black;
+		font-family: 'Special Elite';
+		font-size: 20px;
+	}
+	.subtitles-3 {
+		color: black;
+		font-family: 'Lucida Console';
+		font-size: 40px;
+	}
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 p-5">
+            <h3 class="subtitles-3">Welcome To The In'Box'</h3>
+            <hr class="lines"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-5">
+            <form medthod="GET" action="{% url 'accounts:create-thread' %}">
+                <button class="btn btn-light p-3" type="sumbit"> Start a Convo </button>
+            </form>
+        </div>
+    </div>
+
+    {% for thread in threads.all %}
+    <div class="row mb-3">
+        <div class="card col-md-12 p-5 shadow-sm">
+            <h5 class="subtitles-2">{{ thread.user }} - {{ thread.receiver }}</h5>
+            <a class="stretched-link" href="{% url 'accounts:thread' thread.pk %}"></a>
+        </div> 
+    </div>
+    {% endfor %}
+</div>
+<hr class="lines"/>
+<p class="subtitles-2">THE BOX 2022</p>
+{% endblock content %}

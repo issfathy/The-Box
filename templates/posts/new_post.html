@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+New Post
+{%endblock%}
+
+
+
+{%block content%}
+
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Lucida Console'
+' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Tinos' rel='stylesheet'>
+
+<style>
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+		font-size: 40px;
+	}
+
+	.subtitles-2 {
+		color: black;
+		font-family: "Times New Roman", "Times", "serif";
+		font-size: 20px;
+		text-align: left;
+	}
+
+	.subtitles-3 {
+		color: black;
+		font-family: 'Lucida Console';
+
+		font-size: 40px;
+	}
+
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+</style>
+
+<h1 class="subtitles">Create New Post</h1>
+<hr class="lines"/>
+
+<form method='post' enctype="multipart/form-data" class="subtitles-2">
+	{{new_post_form.as_p}}
+	{%csrf_token%}
+	<input type="submit" value="Save">
+</form>
+
+{%endblock%}

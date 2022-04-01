@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+
+{%block title%}
+Register Yourself
+{%endblock%}
+
+
+{%block content%}
+<link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+<style>
+	.title {
+		color: black;
+		font-family: 'Bungee Shade';
+		font-size: relative;
+	}
+
+	.form {
+		text-align: left;
+	}
+</style>
+
+<h1 class="title">Welcome</h1>
+
+<form method='post' class="form">
+	{{user_form.as_p}}
+	{{profile_form.as_p}}
+	{%csrf_token%}
+	<input class="btn btn-primary" type="submit" value="Consider Me In!">
+</form>
+
+{%endblock%}

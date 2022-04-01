@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Enter The Box
+{%endblock%}
+
+
+
+{%block content%}
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+<style>
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+		font-size: 30px;
+	}
+
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+
+	.info {
+		color: black;
+		font-family: 'Times New Roman', Times, serif;
+		font-size: 20px;
+		text-align: center;
+	}
+</style>
+
+<h1 class="subtitles">Log Into The Box </h1>
+
+<hr class="lines">
+
+<br />
+
+<form method="post">
+	{{login_form.as_p}}
+	{%csrf_token%}
+	<input class="btn btn-success" type="submit" value="Let's go!">
+</form>
+
+<p class="info"><a href="{%url 'accounts:password_reset'%}">Forgot Password?</a></p>
+
+<hr class="lines">
+
+{%endblock%}

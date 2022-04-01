@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    .empty-text {
+        color: #777;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .received-message {
+        background-color: #acaaaa;
+        border-radius: 30px;
+        padding: 10px 25px;
+        width: 25%;
+        float: left;
+    }
+
+    .sent-message {
+        background-color: rgb(1, 81, 255);
+        color: #fff;
+        border-radius: 30px;
+        padding: 10px 25px;
+        width: 25%;
+        float: right;
+    }
+
+    .row-1 {
+        display: inline-block;
+        border-radius: 30px;
+        padding: 10px 25px;
+        width: 25%;
+    }
+
+    .hr {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0), blue, turquoise, blue, rgba(0, 0, 0, 0));
+        height: 5px;
+        border: 0;
+    }
+</style>
+<div class="container">
+    <div class="row-1">
+        <div class="card col-md-12 mt-5 p-3 shadow-sm">
+            {% if thread.receiver == request.user %}
+            <h5>@{{ thread.user }}</h5>
+            {% else %}
+            <h5>@{{ thread.receiver }}</h5>
+            {% endif %}
+        </div>
+    </div>
+
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
+
+
+    <div class="row-1">
+        <div class="card col-md-12 p-3 shadow-sm">
+            {% if thread.receiver == request.user %}
+            <h5>@{{ thread.receiver }}</h5>
+            {% else %}
+            <h5>@{{ thread.user }}</h5>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="hr" />
+    {% if message_list.all.count == 0 %}
+    <div class="row my-5">
+        <div class="col-md-12">
+            <p class="empty-text">No Messages</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% for message in message_list %}
+    <div class="row">
+        <div class="col-md-12 my-1">
+            {% if message.sender_user == request.user %}
+            <div class="sent-message my-3">
+                <p>{{ message.body }}</p>
+            </div>
+            {% elif message.receiver_user == request.user %}
+            <div class="received-message my-3">
+                <p>{{ message.body }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="row-3">
+        <div class="card col-md-12 p-3 shadow-sm">
+            <form method="POST" action="{% url 'accounts:create-message' thread.pk %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-light" type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

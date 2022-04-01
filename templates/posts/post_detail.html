@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+{%load posts_tags%}
+
+
+
+{%block title%}
+{{post.title}}
+{%endblock%}
+
+
+
+{%block content%}
+<style>
+	img {
+		height: 300px;
+		width: 400px;
+		/* border-radius: 50%; */
+		overflow: hidden;
+		background-position: center center;
+		background-size: cover;
+	}
+</style>
+{%if request.user == post.author %}
+<a href="{%url 'posts:edit_post' post.pk post.slug %}"> <button>Edit Post</button> </a>
+{%endif%}
+
+<h1>{{post.title}}</h1>
+by <h2> {{post.author}} </h2> on <h4> {{post.publish}} </h4>
+
+{% if post.post_image %}
+<img src="{{ post.post_image.url }}">
+{% endif %}
+
+<p>
+	{{post.body|markdown}}
+</p>
+
+<br /><br />
+<hr>
+<br />
+<form action="{% url 'posts:like_post' post.pk %}" method="POST">
+	{% csrf_token %}
+	<button type="submit" , name="post_id" , value="{{ post.id }}" class="btn btn-primary">Likes - {{post.total_likes}}</button>
+</form>
+{%endblock%}

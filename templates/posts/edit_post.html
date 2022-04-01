@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Edit Post
+{%endblock%}
+
+
+
+{%block content%}
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Tinos' rel='stylesheet'>
+
+
+<style>
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+	}
+	.subtitles-4 {
+		color: black;
+		font-family: 'Tinos';
+		font-size: 20px;
+		text-align: left;
+	}
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+</style>
+
+<h1 class="subtitles">Edit Post</h1>
+<hr class="lines"/>
+
+<form method='post' class="subtitles-4">
+	{{edit_post_form.as_p}}
+	{%csrf_token%}
+	<input type="submit" value='Save'>
+</form>
+
+{%endblock%}

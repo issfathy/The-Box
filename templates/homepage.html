@@ -1,0 +1,80 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+The Box
+{%endblock%}
+
+
+
+{%block content%}
+<link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+<style>
+	.title {
+		color: black;
+		font-family: 'Bungee Shade';
+		font-size: 100px;
+	}
+
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+		font-size: 30px;
+	}
+
+	.info {
+		color: black;
+		font-family: 'Times New Roman', Times, serif;
+		font-size: 25px;
+	}
+
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+
+</style>
+
+<h1 class="title">The Box</h1>
+<hr class="lines">
+
+<h4 class="subtitles">
+	By: Shreya Sanjiv, Jeff Jerome, Fathy Elhadidy
+</h4>
+<p class="info">
+	Contact Us: <a href="mailto:theboxsjf@gmail.com">Email</a>
+</p>
+<hr class="lines">
+{%endblock%}
+
+
+
+{%block content_no_jt%}
+
+{%if not request.user.is_authenticated %}
+
+<div class="jumbotron">
+
+	<a href="{%url 'accounts:register'%}">
+		<button class="btn btn-warning" style="padding:60px;">
+			<font size=30px;><b>Register</b></font>
+		</button>
+	</a>
+
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+	<a href="{%url 'accounts:login'%}">
+		<button class="btn btn-success" style="padding:60px;">
+			<font size=30px;><b>&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;</b></font>
+		</button>
+	</a>
+</div>
+
+{%endif%}
+
+{%endblock content_no_jt%}

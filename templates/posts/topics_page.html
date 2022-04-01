@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Topics
+{%endblock%}
+
+
+
+{%block content%}
+<link href='https://fonts.googleapis.com/css?family=Copperplate' rel='stylesheet'>
+
+<style>
+	.subtitles {
+		color: black;
+		font-family: 'Copperplate';
+	}
+	.lines {
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), lightgrey, black, lightgrey, rgba(0, 0, 0, 0));
+		height: 3px;
+		border: 0;
+	}
+</style>
+<h1 class="subtitles">Topics:</h1>
+<hr class="lines"/>
+
+
+{%if topics%}
+{%for topic in topics%}
+
+<p>
+	<a href="{%url 'posts:posts_by_topic' topic.slug %}">
+		<h3>
+			{{topic.name|title}}
+		</h3>
+	</a>
+</p>
+
+
+{%endfor%}
+{%endif%}
+{%endblock%}
