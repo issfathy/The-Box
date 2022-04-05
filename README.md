@@ -30,3 +30,4 @@ Things to Test:
 4. Contact the help center
 5. Edit posts 
 	
+Created by La Salle Students: Fathy Elhadidy, Shreya Sanjiv, and Jeff Jerome
